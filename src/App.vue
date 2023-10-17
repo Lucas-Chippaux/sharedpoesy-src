@@ -52,6 +52,18 @@ export default {
         connected = true;
         currentUser=pb.authStore.model;
       }
+     },
+      
+      async githublogin() {
+      await pb.collection("users").authWithOAuth2({ provider: "github" });
+      if (pb.authStore.isValid) {
+        document.getElementById("status").innerHTML = "You are now logged in";
+        connected = true;
+        currentUser = pb.authStore.model;
+        document.getElementById("signOut").style.visibility = "hidden";
+      }
+    }
+
     }/*,
     async add() {
       const record = await pb.collection("poems").create({
@@ -62,8 +74,8 @@ export default {
       });
     },*/
     //this method allows the already registred user to log in the system.
-  },
-};
+  };
+
 </script>
 
 <style>
